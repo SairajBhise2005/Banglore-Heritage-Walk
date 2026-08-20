@@ -1,0 +1,7 @@
+{
+  "name": "bengaluru-heritage-walk",
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "*"
+  }
+}

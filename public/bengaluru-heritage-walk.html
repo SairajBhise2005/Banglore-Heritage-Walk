@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bengaluru Heritage Walk — Guide's Handbook</title>
+<meta name="description" content="A stop-by-stop handbook for leading a heritage walk from Yelahanka to VV Puram.">
+<meta name="theme-color" content="#DCDCD1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=DM+Mono:wght@400;500&family=Noto+Sans+Kannada:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#DCDCD1;
+  --stone-2:#CFD0C4;
+  --paper:#FBFAF5;
+  --ink:#1E2320;
+  --ink-60:#5B615A;
+  --ink-35:#8D928B;
+  --rule:#C3C5B8;
+  --shadow:rgba(30,35,32,.16);
+  --c:#4A5BA8;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Newsreader",Georgia,serif;
+  --mono:"DM Mono",ui-monospace,monospace;
+  --kn:"Noto Sans Kannada",sans-serif;
+  --pad:20px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--stone);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.55;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+}
+.wrap{position:relative;z-index:1;max-width:620px;margin:0 auto;padding:0 var(--pad) 80px}
+
+/* ---------- sticky bar ---------- */
+.bar{
+  position:sticky;top:0;z-index:40;margin:0 calc(var(--pad)*-1);
+  padding:9px var(--pad) 8px;
+  background:rgba(220,220,209,.93);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+.bar-row{display:flex;align-items:center;gap:10px}
+.bar-now{
+  flex:1;min-width:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-60);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.bar-now b{color:var(--ink);font-weight:500}
+.bar-now .dotc{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-right:7px;vertical-align:1px;transition:background .3s}
+.btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  background:none;border:1px solid var(--ink);color:var(--ink);
+  padding:6px 10px;border-radius:2px;cursor:pointer;white-space:nowrap;
+}
+.btn:active{background:var(--ink);color:var(--stone)}
+.progress{height:2px;background:var(--rule);margin:8px calc(var(--pad)*-1) -8px;position:relative}
+.progress i{position:absolute;inset:0 auto 0 0;width:0;background:var(--ink);transition:width .12s linear}
+
+/* pace switch */
+.pace{display:flex;gap:6px;margin-top:9px}
+.pace button{
+  flex:1;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  padding:7px 4px;border:1px solid var(--rule);background:transparent;color:var(--ink-60);
+  border-radius:2px;cursor:pointer;line-height:1.2;
+}
+.pace button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--stone)}
+.pace-note{font-family:var(--mono);font-size:10.5px;color:var(--ink-60);margin-top:7px;line-height:1.45}
+.collapsed{display:none}
+
+/* ---------- hero ---------- */
+.hero{padding:34px 0 12px}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-60);
+}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(40px,13vw,62px);
+  line-height:.92;letter-spacing:-.03em;margin:14px 0 0;
+}
+h1 span{display:block}
+h1 .thin{font-weight:500;font-style:normal;color:var(--ink-60)}
+.hero-kn{font-family:var(--kn);font-size:20px;color:var(--ink-60);margin-top:14px;line-height:1.4}
+.hero-sub{margin-top:18px;font-size:19px;max-width:34ch}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;
+}
+.chip{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid var(--rule);padding:5px 8px;border-radius:2px;color:var(--ink-60);
+}
+.rule{height:1px;background:var(--rule);margin:30px 0}
+
+/* ---------- intro card ---------- */
+.card{
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  padding:22px 18px;box-shadow:3px 4px 0 var(--shadow);
+}
+.card h2{
+  font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.02em;margin:0 0 10px;
+}
+.label{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-35);margin:22px 0 8px;
+}
+.label:first-child{margin-top:0}
+ul.pts{margin:0;padding-left:0;list-style:none}
+ul.pts li{position:relative;padding-left:18px;margin-bottom:5px;font-size:16.5px}
+ul.pts li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:var(--c)}
+
+/* ---------- timeline map ---------- */
+.tl{position:relative;padding:4px 0 0 0}
+.tl::before{content:"";position:absolute;left:11px;top:14px;bottom:14px;width:2px;background:var(--rule)}
+.tl-fill{position:absolute;left:11px;top:14px;width:2px;background:var(--ink);height:0;transition:height .15s linear}
+.tl a{
+  display:flex;gap:14px;align-items:baseline;text-decoration:none;color:inherit;
+  padding:7px 0;position:relative;
+}
+.tl a .d{
+  flex:none;width:24px;display:flex;justify-content:center;
+}
+.tl a .d i{
+  width:11px;height:11px;border-radius:50%;background:var(--stone);
+  border:2px solid var(--c);display:block;position:relative;top:5px;transition:background .25s;
+}
+.tl a.done .d i{background:var(--c)}
+.tl a .t{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.01em}
+.tl a .e{font-family:var(--mono);font-size:10.5px;color:var(--ink-60);margin-left:auto;text-align:right;padding-left:10px}
+.tl a.skip .t,.tl a.skip .e{opacity:.35;text-decoration:line-through;text-decoration-thickness:1px}
+.tl a.trim .e{opacity:.6}
+
+/* ---------- stops ---------- */
+.stop{margin-top:52px;scroll-margin-top:110px}
+.stop.is-skip{opacity:.32;filter:saturate(.15)}
+.stop.is-skip .body{display:none}
+.skipflag{
+  display:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-60);border:1px dashed var(--rule);padding:8px 10px;margin-top:12px;border-radius:2px;
+}
+.stop.is-skip .skipflag{display:block}
+.trimflag{
+  display:none;font-family:var(--mono);font-size:10.5px;line-height:1.5;letter-spacing:.03em;
+  color:var(--ink-60);border-left:2px solid var(--c);padding:2px 0 2px 10px;margin:14px 0 0;
+}
+.stop.is-trim .trimflag{display:block}
+.stop.is-skip .trimflag{display:none}
+
+.illo{
+  position:relative;background:var(--stone-2);border:1px solid var(--rule);border-radius:3px;
+  overflow:hidden;box-shadow:3px 4px 0 var(--shadow);
+}
+.illo svg{display:block;width:100%;height:auto}
+.num{
+  position:absolute;left:0;top:0;background:var(--c);color:var(--paper);
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:5px 9px 4px;
+}
+.cut [stroke]{stroke:var(--paper);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round}
+.cut g{filter:drop-shadow(2.5px 3px 0 rgba(30,35,32,.14))}
+
+.head{margin-top:16px}
+.era{
+  font-family:var(--mono);font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--c);
+}
+h3{
+  font-family:var(--display);font-weight:800;font-size:clamp(28px,8.5vw,38px);
+  line-height:1;letter-spacing:-.03em;margin:8px 0 0;
+}
+.kn{font-family:var(--kn);font-size:16px;color:var(--ink-60);margin-top:8px}
+.theme{font-style:italic;color:var(--ink-60);margin:10px 0 0;font-size:17px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.body{margin-top:16px}
+.card + .card{margin-top:12px}
+.fact{
+  background:transparent;border:none;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  padding:16px 0;margin-top:22px;box-shadow:none;
+}
+.travel{
+  display:flex;align-items:center;gap:9px;margin-top:34px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-60);
+}
+.travel::before{content:"";width:2px;height:34px;background:var(--rule);margin-left:11px}
+.check{
+  margin-top:20px;display:flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-60);
+  background:none;border:1px solid var(--rule);border-radius:2px;padding:9px 12px;width:100%;cursor:pointer;
+}
+.check i{width:14px;height:14px;border:1.5px solid var(--ink-35);border-radius:2px;display:block;flex:none;position:relative}
+.check[aria-pressed=true]{color:var(--ink);border-color:var(--ink)}
+.check[aria-pressed=true] i{background:var(--c);border-color:var(--c)}
+.check[aria-pressed=true] i::after{
+  content:"";position:absolute;left:4px;top:.5px;width:4px;height:8px;
+  border:solid var(--paper);border-width:0 2px 2px 0;transform:rotate(42deg);
+}
+
+/* ---------- cheatsheet ---------- */
+.cheat{margin-top:52px}
+.cheat table{width:100%;border-collapse:collapse}
+.cheat td{padding:11px 0;border-bottom:1px solid var(--rule);vertical-align:baseline}
+.cheat td:first-child{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.01em;padding-right:12px}
+.cheat td:last-child{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-60);text-align:right;white-space:nowrap}
+.foot{margin-top:46px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-35);line-height:1.8}
+.top{margin-top:22px;text-align:center}
+
+h2.sec{
+  font-family:var(--display);font-weight:800;font-size:clamp(26px,7vw,34px);
+  letter-spacing:-.03em;line-height:1;margin:0 0 4px;
+}
+.sec-note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-60);margin:0 0 18px}
+
+/* ---------- scoreboard ---------- */
+.sb table{width:100%;border-collapse:collapse}
+.sb td{padding:11px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.sb .rk{font-family:var(--mono);font-size:11px;color:var(--ink-35);width:24px}
+.sb .nm{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.01em}
+.sb .sc{text-align:right;white-space:nowrap}
+.sb .sc b{font-family:var(--mono);font-size:16px;font-weight:500}
+.sb .empty{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-35);border-bottom:none}
+.mini{
+  font-family:var(--mono);font-size:14px;line-height:1;
+  border:1px solid var(--rule);background:transparent;color:var(--ink);
+  min-width:28px;height:28px;padding:0 5px;border-radius:2px;cursor:pointer;vertical-align:middle;
+}
+.mini:active{background:var(--ink);color:var(--stone)}
+.mini.score{font-size:16px;padding:0 9px}
+.sb-admin{display:none;gap:6px;margin-top:16px}
+.sb-admin input{
+  flex:1;min-width:0;font-family:var(--body);font-size:16px;color:var(--ink);
+  background:var(--paper);border:1px solid var(--rule);border-radius:2px;padding:8px 10px;
+}
+.sb-foot{margin-top:16px;display:flex;align-items:center;gap:10px}
+.sb-foot span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-35)}
+
+/* ---------- motion ---------- */
+.rev{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.rev.in{opacity:1;transform:none}
+.rev.d1{transition-delay:.07s}.rev.d2{transition-delay:.14s}.rev.d3{transition-delay:.21s}
+.illo.rev{transform:translateY(26px) scale(.985)}
+.illo.rev.in{transform:none}
+@media (prefers-reduced-motion:reduce){
+  .rev{opacity:1;transform:none;transition:none}
+  *{scroll-behavior:auto!important}
+}
+html{scroll-behavior:smooth}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media(min-width:640px){:root{--pad:32px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar" id="bar">
+    <div class="bar-row">
+      <div class="bar-now" id="now"><span class="dotc"></span><b>Start</b> — Yelahanka</div>
+      <button class="btn" id="planBtn" aria-expanded="false">Pace</button>
+      <button class="btn" id="jumpBtn">Stops</button>
+    </div>
+    <div id="planPanel" class="collapsed">
+      <div class="pace" role="group" aria-label="Time plan">
+        <button data-pace="green" aria-pressed="true">Green<br>on time</button>
+        <button data-pace="yellow" aria-pressed="false">Yellow<br>45–60 late</button>
+        <button data-pace="red" aria-pressed="false">Red<br>90+ late</button>
+      </div>
+      <p class="pace-note" id="paceNote">Full route. Twelve stops, north to south.</p>
+    </div>
+    <div class="progress"><i id="brfill"></i></div>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow rev">Guide's handbook · Group of 8 · Public transport</div>
+    <h1 class="rev d1"><span>Twelve</span><span class="thin">Bengalurus,</span><span>one day.</span></h1>
+    <div class="hero-kn rev d2">ಬೆಂಗಳೂರು ಪರಂಪರೆ ನಡಿಗೆ</div>
+    <p class="hero-sub rev d2">Yelahanka to VV Puram — a walk down the length of the city, and down the length of its history.</p>
+    <div class="hero-meta rev d3">
+      <span class="chip">12 stops</span>
+      <span class="chip">North → South</span>
+      <span class="chip">Breakfast · Lunch · Feast</span>
+      <span class="chip">2–5 min per stop</span>
+    </div>
+  </header>
+
+  <div class="rule"></div>
+
+  <section class="card rev">
+    <h2>How to use this</h2>
+    <p style="margin:0 0 12px">Each stop gives you the facts, the things worth pointing at, and the walk to the next one. Two to five minutes of talking per stop is plenty.</p>
+    <p style="margin:0;color:var(--ink-60)">Running late? Open <b>Pace</b> in the top bar and the route trims itself.</p>
+  </section>
+
+  <section id="routemap" style="margin-top:52px" class="rev">
+    <h2 class="sec">The route</h2>
+    <p class="sec-note">Tap a stop to jump · dots fill as you tick them off</p>
+    <div class="tl" id="tl"><div class="tl-fill" id="tlfill"></div></div>
+  </section>
+
+  <main id="stops"></main>
+
+  <section class="sb rev" id="scoreboard" style="margin-top:52px">
+    <h2 class="sec">Scoreboard</h2>
+    <p class="sec-note">Live · refreshes on its own</p>
+    <table><tbody id="sbBody"></tbody></table>
+    <div class="sb-admin" id="sbAdmin">
+      <input id="sbNew" placeholder="New team name" maxlength="60" autocomplete="off">
+      <button class="btn" id="sbAdd">Add team</button>
+    </div>
+    <div class="sb-foot">
+      <button class="btn" id="sbLogin">Admin</button>
+      <span id="sbStatus"></span>
+    </div>
+  </section>
+
+  <section class="cheat rev" id="cheat">
+    <h2 class="sec">Cheat sheet</h2>
+    <p class="sec-note">If you forget everything else, remember this sequence</p>
+    <table id="cheatTable"></table>
+  </section>
+
+  <section class="card rev" style="margin-top:40px">
+    <div class="label">The arc, in one line</div>
+    <p style="margin:0;font-size:19px">Planned Bengaluru → colonial Bengaluru → independent India → the Garden City → the old market city → Tipu's Bengaluru → south Bengaluru's living streets → rock older than all of it → dinner.</p>
+  </section>
+
+  <div class="top"><button class="btn" id="topBtn">Back to top</button></div>
+  <p class="foot">Yelahanka → VV Puram<br>Walk safe. Count to eight at every bus stop.</p>
+</div>
+
+<script>
+/* ============ illustrations: layered paper-cutout SVG ============ */
+const P = '#F0EADC', D = '#2A2E28';
+const svg = (inner) => `<svg viewBox="0 0 200 140" class="cut" role="img" aria-hidden="true">${inner}</svg>`;
+
+const ART = {
+malleswaram: svg(`
+<g>
+<rect x="0" y="104" width="200" height="36" fill="currentColor" fill-opacity=".22" stroke="none"/>
+<path d="M12 104V66l26-16 26 16v38z" fill="currentColor" fill-opacity=".55" stroke="${P}"/>
+<path d="M4 68 38 46l34 22z" fill="currentColor" stroke="${P}"/>
+<rect x="28" y="80" width="20" height="24" fill="${P}" stroke="none"/>
+<path d="M78 104V72l24-14 24 14v32z" fill="currentColor" fill-opacity=".38" stroke="${P}"/>
+<path d="M70 74 102 55l32 19z" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+<rect x="88" y="84" width="12" height="20" fill="${P}" stroke="none"/>
+<rect x="108" y="84" width="12" height="12" fill="${P}" stroke="none"/>
+<path d="M162 104V54" stroke="${D}" stroke-width="5" fill="none"/>
+<path d="M162 56c-14-12-26-12-34-4 12-2 22 2 30 8zM162 56c14-12 26-12 34-4-12-2-22 2-30 8zM162 50c-6-16-18-22-28-20 12 4 20 12 24 22zM162 50c6-16 18-22 28-20-12 4-20 12-24 22z" fill="currentColor" stroke="none"/>
+<path d="M0 122h32M48 122h32M96 122h32M144 122h32M192 122h8" stroke="${P}" stroke-width="3" fill="none"/>
+</g>`),
+
+attara: svg(`
+<g>
+<rect x="0" y="112" width="200" height="28" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<rect x="20" y="46" width="160" height="66" fill="currentColor" stroke="${P}"/>
+<path d="M14 46 100 16l86 30z" fill="currentColor" fill-opacity=".7" stroke="${P}"/>
+<path d="M40 112V82a12 12 0 0 1 24 0v30z" fill="${P}" stroke="none"/>
+<path d="M88 112V82a12 12 0 0 1 24 0v30z" fill="${P}" stroke="none"/>
+<path d="M136 112V82a12 12 0 0 1 24 0v30z" fill="${P}" stroke="none"/>
+<rect x="30" y="60" width="10" height="52" fill="currentColor" fill-opacity=".45" stroke="none"/>
+<rect x="160" y="60" width="10" height="52" fill="currentColor" fill-opacity=".45" stroke="none"/>
+<rect x="8" y="112" width="184" height="7" fill="currentColor" fill-opacity=".6" stroke="${P}"/>
+<rect x="0" y="121" width="200" height="7" fill="currentColor" fill-opacity=".4" stroke="${P}"/>
+</g>`),
+
+vidhana: svg(`
+<g>
+<rect x="0" y="116" width="200" height="24" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<rect x="16" y="70" width="168" height="46" fill="currentColor" fill-opacity=".45" stroke="${P}"/>
+<rect x="66" y="54" width="68" height="62" fill="currentColor" stroke="${P}"/>
+<path d="M100 10c14 10 22 22 22 32H78c0-10 8-22 22-32z" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+<path d="M100 4v8" stroke="${D}" stroke-width="4" fill="none"/>
+<rect x="74" y="42" width="52" height="12" fill="currentColor" fill-opacity=".6" stroke="${P}"/>
+<path d="M78 116V88h12v28zM94 116V88h12v28zM110 116V88h12v28z" fill="${P}" stroke="none"/>
+<path d="M26 116V82h10v34zM44 116V82h10v34zM146 116V82h10v34zM164 116V82h10v34z" fill="${P}" stroke="none"/>
+<rect x="6" y="116" width="188" height="7" fill="currentColor" fill-opacity=".55" stroke="${P}"/>
+<rect x="0" y="125" width="200" height="7" fill="currentColor" fill-opacity=".35" stroke="${P}"/>
+</g>`),
+
+cubbon: svg(`
+<g>
+<rect x="0" y="110" width="200" height="30" fill="currentColor" fill-opacity=".28" stroke="none"/>
+<path d="M74 110V56" stroke="${D}" stroke-width="9" fill="none"/>
+<path d="M74 74 52 60M74 82l26-16" stroke="${D}" stroke-width="5" fill="none"/>
+<circle cx="74" cy="44" r="30" fill="currentColor" stroke="${P}"/>
+<circle cx="40" cy="58" r="22" fill="currentColor" fill-opacity=".72" stroke="${P}"/>
+<circle cx="108" cy="56" r="24" fill="currentColor" fill-opacity=".55" stroke="${P}"/>
+<path d="M148 110V84h44v26z" fill="currentColor" fill-opacity=".5" stroke="${P}"/>
+<path d="M142 84l28-18 28 18z" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+<path d="M156 110V92h10v18zM174 110V92h10v18z" fill="${P}" stroke="none"/>
+<path d="M0 124h60M76 124h50M142 124h58" stroke="${P}" stroke-width="3" fill="none"/>
+</g>`),
+
+krmarket: svg(`
+<g>
+<rect x="0" y="112" width="200" height="28" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<path d="M100 26v18" stroke="${D}" stroke-width="4" fill="none"/>
+<path d="M28 46c8-16 30-26 44-26s36 10 44 26z" fill="currentColor" fill-opacity=".75" stroke="${P}" transform="translate(28,0)"/>
+<path d="M100 44v34" stroke="${D}" stroke-width="4" fill="none"/>
+<rect x="16" y="78" width="46" height="34" fill="currentColor" stroke="${P}"/>
+<rect x="16" y="60" width="46" height="18" fill="currentColor" fill-opacity=".5" stroke="${P}"/>
+<circle cx="28" cy="70" r="5" fill="${P}" stroke="none"/><circle cx="40" cy="70" r="5" fill="${P}" stroke="none"/><circle cx="52" cy="70" r="5" fill="${P}" stroke="none"/>
+<rect x="70" y="86" width="58" height="26" fill="currentColor" fill-opacity=".55" stroke="${P}"/>
+<path d="M76 86h46M76 96h46M76 106h46" stroke="${P}" stroke-width="2.4" fill="none"/>
+<rect x="136" y="72" width="50" height="40" fill="currentColor" fill-opacity=".4" stroke="${P}"/>
+<path d="M148 72c0 22 6 34 12 34s12-12 12-34" fill="none" stroke="${D}" stroke-width="4"/>
+<circle cx="150" cy="60" r="6" fill="currentColor" stroke="${P}"/><circle cx="164" cy="56" r="6" fill="currentColor" stroke="${P}"/><circle cx="178" cy="60" r="6" fill="currentColor" stroke="${P}"/>
+</g>`),
+
+tipu: svg(`
+<g>
+<rect x="0" y="114" width="200" height="26" fill="currentColor" fill-opacity=".22" stroke="none"/>
+<rect x="26" y="52" width="148" height="62" fill="currentColor" fill-opacity=".4" stroke="${P}"/>
+<path d="M16 52 100 24l84 28z" fill="currentColor" stroke="${P}"/>
+<path d="M8 88h184" stroke="${P}" stroke-width="3" fill="none"/>
+<path d="M44 114V76c0-8 5-12 11-12s11 4 11 12v38z" fill="${P}" stroke="none"/>
+<path d="M89 114V76c0-8 5-12 11-12s11 4 11 12v38z" fill="${P}" stroke="none"/>
+<path d="M134 114V76c0-8 5-12 11-12s11 4 11 12v38z" fill="${P}" stroke="none"/>
+<rect x="34" y="52" width="8" height="62" fill="${D}" stroke="none"/>
+<rect x="79" y="52" width="8" height="62" fill="${D}" stroke="none"/>
+<rect x="124" y="52" width="8" height="62" fill="${D}" stroke="none"/>
+<rect x="166" y="52" width="8" height="62" fill="${D}" stroke="none"/>
+<rect x="12" y="114" width="176" height="8" fill="currentColor" fill-opacity=".6" stroke="${P}"/>
+</g>`),
+
+mtr: svg(`
+<g>
+<rect x="0" y="116" width="200" height="24" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<ellipse cx="76" cy="104" rx="66" ry="16" fill="currentColor" fill-opacity=".45" stroke="${P}"/>
+<ellipse cx="56" cy="94" rx="26" ry="12" fill="${P}" stroke="none"/>
+<ellipse cx="98" cy="94" rx="26" ry="12" fill="${P}" stroke="none"/>
+<ellipse cx="56" cy="90" rx="26" ry="12" fill="currentColor" fill-opacity=".75" stroke="${P}"/>
+<ellipse cx="98" cy="90" rx="26" ry="12" fill="currentColor" fill-opacity=".75" stroke="${P}"/>
+<path d="M150 66h34l-6 34a8 8 0 0 1-8 6h-6a8 8 0 0 1-8-6z" fill="currentColor" stroke="${P}"/>
+<ellipse cx="167" cy="112" rx="26" ry="9" fill="currentColor" fill-opacity=".5" stroke="${P}"/>
+<path d="M56 66c6-8-4-12 2-20M98 66c6-8-4-12 2-20M167 52c6-8-4-12 2-20" stroke="${D}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+</g>`),
+
+gandhi: svg(`
+<g>
+<rect x="0" y="114" width="200" height="26" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<path d="M6 40c26 20 56 20 82 0" fill="none" stroke="${D}" stroke-width="3"/>
+<circle cx="14" cy="44" r="6" fill="currentColor" stroke="${P}"/><circle cx="32" cy="54" r="6" fill="currentColor" fill-opacity=".7" stroke="${P}"/><circle cx="50" cy="58" r="6" fill="currentColor" stroke="${P}"/><circle cx="68" cy="54" r="6" fill="currentColor" fill-opacity=".7" stroke="${P}"/><circle cx="84" cy="44" r="6" fill="currentColor" stroke="${P}"/>
+<path d="M112 34c24 18 52 18 76 0" fill="none" stroke="${D}" stroke-width="3"/>
+<circle cx="118" cy="40" r="5.5" fill="currentColor" fill-opacity=".7" stroke="${P}"/><circle cx="136" cy="48" r="5.5" fill="currentColor" stroke="${P}"/><circle cx="154" cy="50" r="5.5" fill="currentColor" fill-opacity=".7" stroke="${P}"/><circle cx="172" cy="44" r="5.5" fill="currentColor" stroke="${P}"/>
+<path d="M18 114 26 84h56l8 30z" fill="currentColor" fill-opacity=".45" stroke="${P}"/>
+<path d="M30 84c4-12 44-12 48 0z" fill="currentColor" stroke="${P}"/>
+<path d="M108 114l8-24h52l8 24z" fill="currentColor" fill-opacity=".3" stroke="${P}"/>
+<path d="M120 90c4-10 40-10 44 0z" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+</g>`),
+
+bull: svg(`
+<g>
+<rect x="0" y="118" width="200" height="22" fill="currentColor" fill-opacity=".22" stroke="none"/>
+<rect x="14" y="104" width="172" height="14" fill="currentColor" fill-opacity=".45" stroke="${P}"/>
+<path d="M46 104V72c0-18 16-28 40-28h34c18 0 30 10 32 24l4 36z" fill="currentColor" stroke="${P}"/>
+<path d="M120 44c0-14 10-22 24-22s26 8 26 22c0 12-8 20-20 22l-6 12-8-12c-10-2-16-10-16-22z" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+<path d="M124 30c-10-8-22-8-28 0 10 0 18 4 24 10zM166 28c10-10 22-10 28-2-10-1-19 3-24 9z" fill="currentColor" fill-opacity=".55" stroke="${P}"/>
+<circle cx="150" cy="42" r="4" fill="${D}" stroke="none"/>
+<path d="M60 104v14M84 104v14M116 104v14M140 104v14" stroke="${D}" stroke-width="6" fill="none"/>
+<path d="M46 76c-12 4-18 14-16 26" fill="none" stroke="${P}" stroke-width="3"/>
+</g>`),
+
+ganapathi: svg(`
+<g>
+<rect x="0" y="118" width="200" height="22" fill="currentColor" fill-opacity=".22" stroke="none"/>
+<rect x="34" y="106" width="132" height="12" fill="currentColor" fill-opacity=".45" stroke="${P}"/>
+<path d="M60 106c0-26 18-42 40-42s40 16 40 42z" fill="currentColor" fill-opacity=".55" stroke="${P}"/>
+<circle cx="100" cy="52" r="30" fill="currentColor" stroke="${P}"/>
+<path d="M70 40c-14-6-24 0-24 12s10 20 24 16zM130 40c14-6 24 0 24 12s-10 20-24 16z" fill="currentColor" fill-opacity=".75" stroke="${P}"/>
+<path d="M100 60c0 14-10 18-10 26 0 6 6 10 12 8" fill="none" stroke="${P}" stroke-width="3.5"/>
+<circle cx="90" cy="48" r="3.5" fill="${P}" stroke="none"/><circle cx="112" cy="48" r="3.5" fill="${P}" stroke="none"/>
+<path d="M100 22v-8" stroke="${D}" stroke-width="4" fill="none"/>
+<circle cx="100" cy="10" r="6" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+</g>`),
+
+bugle: svg(`
+<g>
+<rect x="0" y="116" width="200" height="24" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<path d="M0 116c20-30 52-46 84-46s58 18 70 46z" fill="currentColor" fill-opacity=".38" stroke="${P}"/>
+<path d="M96 78c14-16 34-22 52-16s30 24 28 54h-96c-4-16 2-30 16-38z" fill="currentColor" fill-opacity=".62" stroke="${P}"/>
+<path d="M40 116c-4-18 6-32 22-34s28 12 26 34z" fill="currentColor" stroke="${P}"/>
+<rect x="132" y="30" width="28" height="30" fill="currentColor" fill-opacity=".85" stroke="${P}"/>
+<path d="M126 30l20-14 20 14z" fill="currentColor" stroke="${P}"/>
+<rect x="142" y="42" width="9" height="18" fill="${P}" stroke="none"/>
+<path d="M22 116V96" stroke="${D}" stroke-width="5" fill="none"/>
+<circle cx="22" cy="88" r="14" fill="currentColor" fill-opacity=".7" stroke="${P}"/>
+</g>`),
+
+vvpuram: svg(`
+<g>
+<rect x="0" y="118" width="200" height="22" fill="currentColor" fill-opacity=".2" stroke="none"/>
+<path d="M4 20c30 16 62 16 92 0M96 20c30 16 62 16 92 0" fill="none" stroke="${D}" stroke-width="2.5"/>
+<circle cx="34" cy="30" r="5" fill="currentColor" stroke="${P}"/><circle cx="66" cy="34" r="5" fill="currentColor" fill-opacity=".6" stroke="${P}"/><circle cx="128" cy="34" r="5" fill="currentColor" stroke="${P}"/><circle cx="160" cy="30" r="5" fill="currentColor" fill-opacity=".6" stroke="${P}"/>
+<rect x="26" y="72" width="148" height="46" fill="currentColor" fill-opacity=".45" stroke="${P}"/>
+<path d="M18 72h164l-10-22H28z" fill="currentColor" stroke="${P}"/>
+<path d="M40 50v22M64 50v22M88 50v22M112 50v22M136 50v22M160 50v22" stroke="${P}" stroke-width="3" fill="none"/>
+<circle cx="70" cy="96" r="20" fill="currentColor" fill-opacity=".8" stroke="${P}"/>
+<circle cx="70" cy="96" r="9" fill="${P}" stroke="none"/>
+<rect x="108" y="86" width="52" height="8" fill="${P}" stroke="none"/>
+<rect x="108" y="100" width="52" height="8" fill="${P}" stroke="none"/>
+<path d="M70 62c6-8-4-12 2-20" stroke="${D}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+</g>`)
+};
+
+/* ============ the walk ============ */
+const STOPS = [
+{
+ id:"malleswaram", n:"01", art:"malleswaram", c:"#4A5BA8",
+ title:"Malleswaram", kn:"ಮಲ್ಲೇಶ್ವರಂ", era:"Planned Bengaluru",
+ theme:"Bengaluru learns to become a modern city",
+ chips:["Breakfast stop","20 min"],
+ pace:{yellow:"trim",red:"trim"},
+ trim:"One street, one breakfast.",
+ points:["The relatively organised road layout","Old homes and traditional neighbourhood character","Temples, markets, colleges and eateries mixed together"],
+ notes:["Developed as a planned extension in the late 19th century, as the crowded older areas needed to decongest — accelerated by the plague crisis.","Unlike the Pete, which grew around a fort and markets, this was laid out deliberately: wider roads, larger plots."],
+ extra:{label:"Breakfast — pick one",text:"Central Tiffin Room or Veena Stores. Keep it quick."},
+ travel:"Metro / bus south to Vidhana Soudha"
+},
+{
+ id:"attara", n:"02", art:"attara", c:"#8C2F39",
+ title:"Attara Kacheri", kn:"ಅಟ್ಟಾರ ಕಚೇರಿ", era:"Colonial Bengaluru",
+ theme:"The machinery of colonial administration",
+ chips:["10 min","Stand facing the red building"],
+ pace:{},
+ points:["Deep red walls","Classical columns and arcades","The scale — built to be obeyed, not admired"],
+ notes:["One of Bengaluru's major colonial-era public buildings; today the Karnataka High Court.","Deliberately different in style from the Indian architecture elsewhere on the route."],
+ extra:{label:"Do this",text:"Turn the group around to face Vidhana Soudha. Colonial administration on one side, an independent state's government on the other."},
+ travel:"Walk · 3 minutes across the road"
+},
+{
+ id:"vidhana", n:"03", art:"vidhana", c:"#B08018",
+ title:"Vidhana Soudha", kn:"ವಿಧಾನ ಸೌಧ", era:"Independent India",
+ theme:"A new country builds its own symbol of power",
+ chips:["10 min","Best group photo"],
+ pace:{},
+ points:["The central dome and its finial","Carved granite, not plaster","The staircase — designed for arrival"],
+ notes:["Completed 1956, under Chief Minister Kengal Hanumanthaiah of Mysore State.","Built to make a different statement from Attara Kacheri: monumental, and drawing on Indian architectural traditions.","Both eras fit in one photograph from between the two buildings."],
+ travel:"Walk · 5 minutes into the park"
+},
+{
+ id:"cubbon", n:"04", art:"cubbon", c:"#3E7A4E",
+ title:"Cubbon Park", kn:"ಕಬ್ಬನ್ ಪಾರ್ಕ್", era:"The Garden City",
+ theme:"Why Bengaluru became the Garden City",
+ chips:["20 min","Refill water here"],
+ pace:{red:"trim"},
+ trim:"Skip the walk. One tree, then move.",
+ points:["Sheshadri Iyer Memorial Hall","The oldest, widest trees","Colonial-era buildings ringing the park"],
+ notes:["Established 1870 under John Meade, acting Commissioner of Mysore; landscape conceived by Major General Richard Sankey.","Originally Meade's Park, later Cubbon Park, officially renamed Sri Chamarajendra Park in 1927.","Green space was part of the city's identity from the start — planning again, but for trees."],
+ extra:{label:"Five minutes",text:"Phones away. Let everyone just look."},
+ travel:"Metro · Cubbon Park → KR Market"
+},
+{
+ id:"krmarket", n:"05", art:"krmarket", c:"#A93576",
+ title:"KR Market", kn:"ಕೆ.ಆರ್. ಮಾರ್ಕೆಟ್", era:"Commercial Bengaluru",
+ theme:"The commercial DNA of the old city",
+ chips:["20 min","Count to 8 constantly","Watch bags"],
+ pace:{yellow:"trim",red:"trim"},
+ trim:"One loop, no wandering, no shopping.",
+ points:["What people carry, and how","The flower trade","How goods actually move — head loads, carts, tempos"],
+ notes:["The old city grew around markets — the Petes. Trade was a foundation of Bengaluru from the beginning.","Not a preserved monument: heritage that still works for a living."],
+ travel:"Walk · 10 minutes towards the old fort area"
+},
+{
+ id:"tipu", n:"06", art:"tipu", c:"#2E7069",
+ title:"Tipu Sultan's Summer Palace", kn:"ಟಿಪ್ಪು ಸುಲ್ತಾನ್ ಅರಮನೆ", era:"Mysore Sultanate",
+ theme:"Bengaluru before British administration",
+ chips:["25 min","Ticketed"],
+ pace:{},
+ points:["Teak pillars and cusped arches","The open upper floor, built for air","How small it is compared to what you expected"],
+ notes:["Started by Hyder Ali, completed under Tipu Sultan in 1791, inside the Bangalore Fort area.","After Tipu Sultan's death in 1799 in the Fourth Anglo-Mysore War, the British used the palace for administration before moving the Secretariat to Attara Kacheri."],
+ extra:{label:"The through-line of the day",text:"Tipu's Palace → British Secretariat → Attara Kacheri → Vidhana Soudha. The group has now walked that chain."},
+ travel:"Bus / auto · to Lalbagh Road for lunch"
+},
+{
+ id:"mtr", n:"07", art:"mtr", c:"#C9741B",
+ title:"MTR", kn:"ಎಂ.ಟಿ.ಆರ್.", era:"Food innovation",
+ theme:"Innovation during a crisis",
+ chips:["Lunch","Expect a queue"],
+ pace:{red:"skip"},
+ skipNote:"drop it if the queue doesn't work; eat at VV Puram instead",
+ points:["Rava idli","Filter coffee in tumbler and davara","The dining room itself — barely changed"],
+ notes:["Began in 1924 as the Brahmins' Coffee Club, started by the Maiya brothers; later Mavalli Tiffin Rooms.","Rice was scarce during the Second World War, so the cooks worked with rava — semolina. That experiment became the rava idli."],
+ travel:"Bus / walk · into Basavanagudi"
+},
+{
+ id:"gandhi", n:"08", art:"gandhi", c:"#C9455F",
+ title:"Gandhi Bazaar", kn:"ಗಾಂಧಿ ಬಜಾರ್", era:"Living heritage",
+ theme:"Heritage that is still alive",
+ chips:["10 min","Walk and look"],
+ pace:{red:"skip"},
+ skipNote:"walk straight through on the way up",
+ points:["Flower sellers and what's in season","Old shopfronts with the family name still on them","How the street changes character by the hour"],
+ notes:["A street that has kept doing the same cultural job for generations — flowers, fruit, temples, eateries, daily life in one place."],
+ travel:"Walk · 6 minutes uphill"
+},
+{
+ id:"bull", n:"09", art:"bull", c:"#8A5A2B",
+ title:"Bull Temple", kn:"ದೋಡ್ಡ ಬಸವಣ್ಣ ದೇವಸ್ಥಾನ", era:"Kempe Gowda's Bengaluru",
+ theme:"The origin of Basavanagudi",
+ chips:["20 min","Shoes off","16th century"],
+ pace:{},
+ points:["The single block of granite","Centuries of oil and pigment on the stone","How the temple sits into the rock itself"],
+ notes:["Basava means bull, gudi means temple — the neighbourhood is named after this place.","Associated with Kempe Gowda, 16th century. Inside is a monolithic Nandi carved from one piece of granite.","Local tradition: farmland here, including groundnut fields, was being damaged by a bull. The story attached itself to Nandi, and farmers began offering the first groundnut harvest — the Kadalekayi Parishe."],
+ travel:"Walk · 2 minutes"
+},
+{
+ id:"ganapathi", n:"10", art:"ganapathi", c:"#B2542F",
+ title:"Dodda Ganapathi", kn:"ದೋಡ್ಡ ಗಣಪತಿ", era:"Monumental stone",
+ theme:"The neighbour next door",
+ chips:["5–10 min"],
+ pace:{yellow:"trim",red:"skip"},
+ trim:"Five minutes, from the doorway.",
+ skipNote:"point at it from the Bull Temple and keep walking",
+ points:["The scale, from a single rock","Butter and decoration on festival days"],
+ notes:["A monolithic Ganesha, like the Nandi next door — stone here was a medium for sculpture, not just a building material."],
+ travel:"Walk · 3 minutes"
+},
+{
+ id:"bugle", n:"11", art:"bugle", c:"#5A6472",
+ title:"Bugle Rock", kn:"ಬ್ಯೂಗಲ್ ರಾಕ್", era:"Before Bengaluru",
+ theme:"Bengaluru before Bengaluru existed",
+ chips:["15 min","Sunset stop"],
+ pace:{},
+ points:["The watchtower on top","How the rock surfaces through the whole neighbourhood","Bats and old trees at dusk"],
+ notes:["The rock formations are estimated at around 3 billion years old.","The city is roughly 500 years old — the scale shift is the point of this stop."],
+ travel:"Walk · 10 minutes to Thindi Beedi"
+},
+{
+ id:"vvpuram", n:"12", art:"vvpuram", c:"#BE2E2E",
+ title:"VV Puram Food Street", kn:"ವಿ.ವಿ. ಪುರಂ ತಿಂಡಿ ಬೀದಿ", era:"Taste of Bengaluru",
+ theme:"You can taste heritage",
+ chips:["Finale","Fix a meeting point"],
+ pace:{},
+ points:["Congress bun, holige, dosa, gulkand — split and share","One meeting point before everyone scatters","A hard end time"],
+ notes:["Thindi Beedi grew organically around local establishments until the street itself became the destination — not a planned food court."],
+ travel:null
+}
+];
+
+/* ============ render ============ */
+const paceCopy = {
+ green:"Full route. Twelve stops, north to south.",
+ yellow:"45–60 minutes behind. Trim Malleswaram, KR Market and Dodda Ganapathi. Keep every stop.",
+ red:"90+ minutes behind. Core story only: Malleswaram → Attara Kacheri & Vidhana Soudha → Tipu Palace → Bull Temple → Bugle Rock → VV Puram."
+};
+
+const esc = s => s;
+const stopsEl = document.getElementById('stops');
+
+stopsEl.innerHTML = STOPS.map((s,i)=>{
+  const blocks = [];
+  if(s.notes) blocks.push(`<div class="card rev">
+      <div class="label">What it is</div>
+      <ul class="pts">${s.notes.map(p=>`<li>${p}</li>`).join('')}</ul>
+    </div>`);
+  if(s.points) blocks.push(`<div class="card rev">
+      <div class="label">Look for</div>
+      <ul class="pts">${s.points.map(p=>`<li>${p}</li>`).join('')}</ul>
+    </div>`);
+  if(s.extra) blocks.push(`<div class="card fact rev">
+      <div class="label">${s.extra.label}</div>
+      <p style="margin:0">${s.extra.text}</p>
+    </div>`);
+
+  return `<article class="stop" id="${s.id}" data-i="${i}" style="--c:${s.c}">
+    <div class="illo rev">${ART[s.art]}<span class="num">${s.n}</span></div>
+    <div class="head">
+      <div class="era rev">${s.era}</div>
+      <h3 class="rev">${s.title}</h3>
+      <div class="kn rev">${s.kn}</div>
+      <p class="theme rev">${s.theme}</p>
+      <div class="meta rev">${(s.chips||[]).map(c=>`<span class="chip">${c}</span>`).join('')}</div>
+      <div class="skipflag">Skipped at this pace — ${s.skipNote||"keep moving"}</div>
+      <div class="trimflag">Short version — ${s.trim||"keep it brief"}</div>
+    </div>
+    <div class="body">
+      ${blocks.join('')}
+      <button class="check" aria-pressed="false" data-i="${i}"><i></i> Mark ${s.title} done</button>
+    </div>
+    ${s.travel?`<div class="travel">${s.travel}</div>`:''}
+  </article>`;
+}).join('');
+
+/* timeline */
+document.getElementById('tl').insertAdjacentHTML('beforeend', STOPS.map(s=>
+  `<a href="#${s.id}" data-id="${s.id}" style="--c:${s.c}">
+     <span class="d"><i></i></span>
+     <span class="t">${s.title}</span>
+     <span class="e">${s.era}</span>
+   </a>`).join(''));
+
+/* cheat sheet */
+document.getElementById('cheatTable').innerHTML = STOPS.map(s=>
+  `<tr><td>${s.title}</td><td>${s.era}</td></tr>`).join('');
+
+/* ============ behaviour ============ */
+const revs = document.querySelectorAll('.rev');
+const io = new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }});
+},{rootMargin:"0px 0px -8% 0px",threshold:.08});
+revs.forEach(el=>io.observe(el));
+document.querySelectorAll('.hero .rev').forEach(el=>el.classList.add('in'));
+
+/* pace */
+let pace = 'green';
+const applyPace = ()=>{
+  STOPS.forEach((s,i)=>{
+    const el = document.getElementById(s.id);
+    const link = document.querySelector(`.tl a[data-id="${s.id}"]`);
+    const state = (s.pace||{})[pace] || 'full';
+    el.classList.toggle('is-skip', state==='skip');
+    el.classList.toggle('is-trim', state==='trim');
+    link.classList.toggle('skip', state==='skip');
+    link.classList.toggle('trim', state==='trim');
+  });
+  document.getElementById('paceNote').textContent = paceCopy[pace];
+};
+document.querySelectorAll('.pace button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    pace = b.dataset.pace;
+    document.querySelectorAll('.pace button').forEach(x=>x.setAttribute('aria-pressed', String(x===b)));
+    applyPace();
+  });
+});
+applyPace();
+
+const planBtn = document.getElementById('planBtn'), planPanel = document.getElementById('planPanel');
+planBtn.addEventListener('click',()=>{
+  const open = planPanel.classList.toggle('collapsed');
+  planBtn.setAttribute('aria-expanded', String(!open));
+});
+document.getElementById('jumpBtn').addEventListener('click',()=>{
+  document.getElementById('routemap').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('topBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* done ticks (session only) */
+const done = new Set();
+document.querySelectorAll('.check').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const i = +btn.dataset.i, on = !done.has(i);
+    on ? done.add(i) : done.delete(i);
+    btn.setAttribute('aria-pressed', String(on));
+    btn.lastChild.textContent = on ? ` ${STOPS[i].title} done` : ` Mark ${STOPS[i].title} done`;
+    const link = document.querySelector(`.tl a[data-id="${STOPS[i].id}"]`);
+    link.classList.toggle('done', on);
+    document.getElementById('tlfill').style.height = (done.size/STOPS.length*100)+'%';
+  });
+});
+
+/* ============ scoreboard ============ */
+const sbBody = document.getElementById('sbBody'),
+      sbAdmin = document.getElementById('sbAdmin'),
+      sbLogin = document.getElementById('sbLogin'),
+      sbStatus = document.getElementById('sbStatus'),
+      sbNew = document.getElementById('sbNew');
+
+let teams = [];
+const sbPw = () => sessionStorage.getItem('sbpw');
+const txt = s => { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; };
+
+function sbRender(){
+  const admin = !!sbPw();
+  sbAdmin.style.display = admin ? 'flex' : 'none';
+  sbLogin.textContent = admin ? 'Exit admin' : 'Admin';
+  const rows = teams.map((t,i)=>({...t,i})).sort((a,b)=>b.score-a.score);
+  sbBody.innerHTML = rows.length ? rows.map((t,r)=>`<tr>
+      <td class="rk">${String(r+1).padStart(2,'0')}</td>
+      <td class="nm">${txt(t.name)}</td>
+      <td class="sc">${admin?`<button class="mini" data-act="dec" data-i="${t.i}" aria-label="Minus one">−</button> `:''
+        }${admin?`<button class="mini score" data-act="set" data-i="${t.i}">${t.score}</button>`:`<b>${t.score}</b>`}${admin?
+        ` <button class="mini" data-act="inc" data-i="${t.i}" aria-label="Plus one">+</button>
+          <button class="mini" data-act="ren" data-i="${t.i}" aria-label="Rename">✎</button>
+          <button class="mini" data-act="del" data-i="${t.i}" aria-label="Delete">×</button>`:''}</td>
+    </tr>`).join('') : `<tr><td class="empty" colspan="3">No teams yet</td></tr>`;
+}
+
+async function sbLoad(){
+  try{
+    const r = await fetch('/api/scoreboard');
+    if(r.ok){ teams = await r.json(); sbStatus.textContent=''; sbRender(); }
+  }catch(e){ sbStatus.textContent = 'offline'; }
+}
+
+async function sbSave(){
+  sbRender();                       // optimistic
+  sbStatus.textContent = 'saving…';
+  const r = await fetch('/api/scoreboard',{
+    method:'POST',
+    headers:{'content-type':'application/json','x-admin-password':sbPw()||''},
+    body:JSON.stringify(teams)
+  }).catch(()=>null);
+  if(r && r.ok){ sbStatus.textContent = 'saved'; }
+  else{
+    if(r && r.status===401){ sessionStorage.removeItem('sbpw'); sbStatus.textContent = 'wrong password'; }
+    else sbStatus.textContent = 'save failed';
+    sbLoad();                       // roll back to whatever the server actually has
+  }
+}
+
+sbLogin.addEventListener('click',()=>{
+  if(sbPw()){ sessionStorage.removeItem('sbpw'); sbStatus.textContent=''; sbRender(); return; }
+  const p = prompt('Admin password');
+  if(!p) return;
+  sessionStorage.setItem('sbpw', p);
+  sbSave();                         // a no-op write, purely to check the password
+});
+
+sbBody.addEventListener('click', e=>{
+  const b = e.target.closest('[data-act]');
+  if(!b || !sbPw()) return;
+  const i = +b.dataset.i, t = teams[i];
+  switch(b.dataset.act){
+    case 'inc': t.score++; break;
+    case 'dec': t.score--; break;
+    case 'set': {
+      const v = prompt(`Score for ${t.name}`, t.score);
+      if(v===null || v.trim()==='' || !Number.isFinite(+v)) return;
+      t.score = Math.trunc(+v); break;
+    }
+    case 'ren': {
+      const n = prompt('Team name', t.name);
+      if(!n || !n.trim()) return;
+      t.name = n.trim().slice(0,60); break;
+    }
+    case 'del':
+      if(!confirm(`Delete ${t.name}?`)) return;
+      teams.splice(i,1); break;
+  }
+  sbSave();
+});
+
+const sbAddTeam = ()=>{
+  const n = sbNew.value.trim();
+  if(!n) return;
+  teams.push({name:n.slice(0,60), score:0});
+  sbNew.value = '';
+  sbSave();
+};
+document.getElementById('sbAdd').addEventListener('click', sbAddTeam);
+sbNew.addEventListener('keydown', e=>{ if(e.key==='Enter') sbAddTeam(); });
+
+sbRender();
+sbLoad();
+setInterval(()=>{ if(!sbPw() && !document.hidden) sbLoad(); }, 15000);
+
+/* current stop + progress */
+const nowEl = document.getElementById('now'), fill = document.getElementById('brfill');
+const root = document.documentElement;
+let ticking = false;
+function update(){
+  ticking = false;
+  const h = document.body.scrollHeight - innerHeight;
+  fill.style.width = Math.min(100, Math.max(0, scrollY/h*100)) + '%';
+  let cur = null;
+  document.querySelectorAll('.stop').forEach(el=>{
+    if(el.getBoundingClientRect().top < innerHeight*0.42) cur = el;
+  });
+  if(cur){
+    const s = STOPS[+cur.dataset.i];
+    nowEl.innerHTML = `<span class="dotc"></span><b>${s.n} ${s.title}</b> — ${s.era}`;
+    root.style.setProperty('--c', s.c);
+  }else{
+    nowEl.innerHTML = `<span class="dotc"></span><b>Start</b> — Yelahanka`;
+    root.style.setProperty('--c', '#4A5BA8');
+  }
+}
+addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(update); }},{passive:true});
+update();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Only public/ is served. node_modules and the test file stay off the live site;
+# the function still bundles ../../valid-teams.mjs from the repo root.
+[build]
+  publish = "public"
+  functions = "netlify/functions"
