@@ -3,3 +3,10 @@
 [build]
   publish = "public"
   functions = "netlify/functions"
+
+# Serve the handbook at the site root too. status 200 = rewrite, not a redirect,
+# so the original /bengaluru-heritage-walk.html link keeps working unchanged.
+[[redirects]]
+  from = "/"
+  to = "/bengaluru-heritage-walk.html"
+  status = 200
