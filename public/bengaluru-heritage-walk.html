@@ -213,6 +213,7 @@ h2.sec{
 .sec-note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-60);margin:0 0 18px}
 
 /* ---------- scoreboard ---------- */
+.sb{scroll-margin-top:110px}
 .sb table{width:100%;border-collapse:collapse}
 .sb td{padding:11px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
 .sb .rk{font-family:var(--mono);font-size:11px;color:var(--ink-35);width:24px}
@@ -258,6 +259,7 @@ html{scroll-behavior:smooth}
       <div class="bar-now" id="now"><span class="dotc"></span><b>Start</b> — Yelahanka</div>
       <button class="btn" id="planBtn" aria-expanded="false">Pace</button>
       <button class="btn" id="jumpBtn">Stops</button>
+      <button class="btn" id="scoreBtn">Scores</button>
     </div>
     <div id="planPanel" class="collapsed">
       <div class="pace" role="group" aria-label="Time plan">
@@ -732,6 +734,9 @@ planBtn.addEventListener('click',()=>{
 });
 document.getElementById('jumpBtn').addEventListener('click',()=>{
   document.getElementById('routemap').scrollIntoView({behavior:'smooth'});
+});
+document.getElementById('scoreBtn').addEventListener('click',()=>{
+  document.getElementById('scoreboard').scrollIntoView({behavior:'smooth'});
 });
 document.getElementById('topBtn').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
